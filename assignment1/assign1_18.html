@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>assign1_18</title>
+		<script type="text/javascript">
+				var gallonsPerFill = [10,20,30];
+				var milesPerFill = [100,230,270];
+				var sum, mpg, avgMpg;
+				sum = 0;
+				for(var i = 0; i < gallonsPerFill.length; i++)
+				{
+					mpg = milesPerFill[i] / gallonsPerFill[i];
+					sum += mpg;
+
+					document.writeln('Trip ' + (i + 1) + ': ' + mpg + ' mpg.<br>');
+				}
+				avgMpg = (sum / gallonsPerFill.length).toFixed(2);
+				document.writeln('Total average mpg: ' + avgMpg);
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>
