@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>assign1_20</title>
+		<script type="text/javascript">
+				var sales = [];
+				var addSales = true;
+				var saleAmount;
+				var commission = 5; // percent
+				var basePay = 1000; // for the pay period
+				var totalPay; // will be basePay + commission on sales
+				while(addSales)
+				{
+					saleAmount = parseFloat(prompt('Add sale amount.\nLeave blank when done.'));
+					 
+					if(!isNaN(saleAmount))
+					{
+						sales.push(saleAmount);
+					}
+					else
+					{
+						addSales = false;
+					}
+				}
+
+				// calculate commission
+				var total = 0;
+				var commissionPay;
+				for(var i = 0; i < sales.length; i++)
+				{
+					total += sales[i];
+					document.writeln('Sale ' + (i + 1) + ': ' + sales[i].toFixed(2) + '<br>');
+				}
+				commissionPay = total * (commission / 100);
+				totalPay = basePay + commissionPay;
+
+				// output
+				document.writeln(commission + '%' + ' commission on total sales: ' + commissionPay.toFixed(2) + '<br>');	
+				document.writeln('Base pay: ' + basePay.toFixed(2));
+				document.writeln('<b>Total pay</b>: ' + totalPay.toFixed(2));
+
+		</script>
+	</head>
+	<body>
+
+	</body>
+</html>

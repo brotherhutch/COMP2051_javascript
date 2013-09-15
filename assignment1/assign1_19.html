@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>assign1_19</title>
+		<script type="text/javascript">
+				var acctNum = prompt('What is your account number?','');
+				var prevBal = parseFloat(prompt('What is your previous balance?',''));
+				var totCharge = parseFloat(prompt('What are your total charges?',''));
+				var totPayments = parseFloat(prompt('What are your total payments/credits?',''));
+				var creditLimit = parseFloat(prompt('What is your credit limit?',''));
+				
+				var balance = 0;
+				balance = prevBal - (totCharge + totPayments);
+
+				if(Math.abs(balance) < creditLimit)
+				{
+					document.writeln('Left over credit');
+				}
+				else
+				{
+					document.writeln('credit exceeded');
+				}
+		</script>
+	</head>
+	<body>
+
+	</body>
+</html>

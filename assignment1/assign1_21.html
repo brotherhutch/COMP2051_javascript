@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>assign1_21</title>
+		<script type="text/javascript">
+				function addEmployee()
+				{
+					// never use float for currency! But I'm going to ;)
+					var name, hrRate, numHoursWeek, overtimeRate, empTable,grossPay, regHours, otHours
+					name = document.getElementById('name').value;
+					hrRate = parseFloat(document.getElementById('hrRate').value);
+					numHoursWeek = document.getElementById('numHoursWeek').value;
+					overtimeRate = hrRate * 1.5;
+
+					// calculate income
+					otHours = numHoursWeek - 40;
+					if (otHours < 0) 
+					{
+						otHours = 0;
+					}
+					if (numHoursWeek > 40)
+					{
+						regHours = 40;
+					}
+					else
+					{
+						regHours = numHoursWeek;
+					}
+					grossPay = (regHours * hrRate) + (otHours * overtimeRate);
+					
+
+					// add employee to table
+					var row, nameCell, grossCell, netCell;
+					empTable = document.getElementById('empTable');
+					row = empTable.insertRow(1);
+					nameCell = row.insertCell(0);
+					grossCell = row.insertCell(1);
+					
+
+					nameCell.innerHTML = name;
+					grossCell.innerHTML = grossPay.toFixed(2);
+					
+					// get ready for new entry
+					document.getElementById('name').focus();
+					document.getElementById('name').select();
+
+				}
+				window.onload = function()
+				{
+					document.getElementById('name').focus();
+				}
+		</script>
+	</head>
+	<body>
+		<form action="javascript:addEmployee();">
+			<span style="display: inline-block; width: 200px;">Name:</span> <input type="text" id="name"><br>
+			<span style="display: inline-block; width: 200px;">Hourly Rate:</span> <input type="text" id="hrRate"><br>
+			<span style="display: inline-block; width: 200px;">Number of Hours This Week:</span> <input type="text" id="numHoursWeek"><br>
+			<input type="submit" value="Add">
+		</form>
+		<hr>
+		<table id="empTable" border="1" style="border-collapse:collapse;">
+			<caption>Employee Pay (1 week)</caption>
+			<tbody>
+				<tr>
+					<th>Name</th>
+					<th>Gross Pay</th>
+				</tr>
+			</tbody>		
+		</table>
+	</body>
+</html>
