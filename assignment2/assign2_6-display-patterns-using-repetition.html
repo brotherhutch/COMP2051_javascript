@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>assign2_6</title>
+  <script type="text/javascript">
+    // document.write("*");
+    // document.write("<br>");
+    // document.write(" ");
+    document.writeln("<pre>");
+    // pattern a
+    for(i = 0; i < 10; i++)
+    {
+      for(j = 0; j < i+1; j++)
+      {
+        document.write("*");
+      }
+      document.write("<br>");
+    }
+
+    document.write("<br>");
+
+    // pattern b
+    for(i = 10; i > 0; i--)
+    {
+      for(j = 0; j < i; j++)
+      {
+        document.write("*");
+      }
+      document.write("<br>");
+    }
+
+    document.write("<br>");
+
+    // pattern c
+    for(i = 0; i < 10; i++)
+    {
+      for(j = 0; j < i; j++)
+      {
+        document.write("&nbsp;");
+      }
+      for(k = 10 - i; k > 0; k--)
+      {
+        document.write("*");
+      }
+      document.write("<br>");
+    }
+
+    document.write("<br>");
+
+    // pattern d
+    for(i = 10; i > 0; i--)
+    {
+      for(j = 0; j < i-1; j++)
+      {
+        document.write("&nbsp;");
+      }
+      for(k = 0 + i; k < 11; k++)
+      {
+        document.write("*");
+      }
+      document.write("<br>");
+    }
+    document.writeln("</pre>");
+  </script>
+</head>
+
+<body>
+
+</body>
+</html>

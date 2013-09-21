@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>assign2_5</title>
+  <script type="text/javascript">
+    var product = 1;
+    var resultString = "Finding the product of: ";
+    var rangeMax = 15; // highest odd number to find the product of (lowest is 1)
+    if(rangeMax % 2 === 0)
+    {
+      rangeMax--; // make sure rangeMax is an odd number
+    }
+
+    for(i = 0; i <= rangeMax; i++)
+    {
+      if(i % 2 != 0)
+      {
+        product = product * i;
+        resultString += i;
+        if(i < rangeMax)
+        {
+          resultString += " x ";
+        }
+      }
+    }
+    resultString += " = " + product;
+    document.writeln(resultString);
+  </script>
+</head>
+
+<body>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>assign2_4</title>
+  <script type="text/javascript">
+    var numberOfNumbers = parseInt(prompt("How many numbers do you want to check?",""));
+    var smallestNumber, inputNumber;
+    for(i = 0; i < numberOfNumbers; i++)
+    {
+      inputNumber = parseInt(prompt("Enter a number",""));
+      if(i == 0)
+      {
+        smallestNumber = inputNumber;
+      }
+      else
+      {
+        if(inputNumber < smallestNumber)
+        {
+          smallestNumber = inputNumber;
+        }
+      }
+    }
+    document.writeln("The smallest number of those entered is: " + smallestNumber);
+  
+  </script>
+</head>
+
+<body>
+
+</body>
+</html>
