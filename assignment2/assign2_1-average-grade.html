@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>assign2_1</title>
+  <script type="text/javascript">
+  	var scores = [];
+  	var numberOfScores = 10;
+  	var sum = 0;
+
+  	for(var i = 0; i < numberOfScores; i++)
+  	{
+  		scores[i] = Math.floor(Math.random() * 101);
+  		sum += scores[i];
+  		document.writeln("Score " + (i + 1) + " is " + scores[i] + "<br>");
+  	}
+	var average = sum / numberOfScores;
+	document.writeln("<hr>");
+	document.writeln("The average of all " + numberOfScores + " scores is " + average); 	
+  </script>
+</head>
+
+<body>
+
+</body>
+</html>
