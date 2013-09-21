@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>assign2_3</title>
+  <script type="text/javascript">
+  	var passFail;
+  	var pass = 0;
+  	var fail = 0;
+  	var numberOfStudents = 10; // change number of students here
+  	for(i = 0, j = numberOfStudents; i < numberOfStudents; i++, j--)
+  	{
+  		passFail = prompt("Enter result (1 or 2)\n" + j + " student result(s) to enter.","");
+  		if(passFail === "1")
+  		{
+  			pass++;
+  			document.writeln("Test entered as a pass" + "<br>");
+  		}
+  		else if (passFail === "2")
+  		{
+  			fail++;
+  			document.writeln("Test entered as a fail" + "<br>");
+  		}
+  		else
+  		{
+  			alert("You must enter a 1 or a 2!");
+  			i--;
+  			j++;
+  		}
+
+
+  	}
+  	document.writeln(pass + " student(s) passed<br>");
+  	document.writeln(fail + " student(s) failed<br>");
+  	if(pass > 8)
+  	{
+  		document.writeln("Raise tuition.");
+  	}
+  </script>
+</head>
+
+<body>
+
+</body>
+</html>
