@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>assign2_14</title>
+  <style type="text/css">
+  body {
+    font-family: arial, sans-serif;
+    font-size: 12px;
+  }
+  </style>
+  <script type="text/javascript">
+    var principal = 1000;
+    var interest = 0.05;
+    var years = 10;
+
+    document.writeln('<table border="1" cellpadding="2" style="border-collapse:collapse;">');
+    document.writeln("<tr>");
+      document.writeln("<th>");
+      document.writeln("Year");
+      document.writeln("</th>");
+      document.writeln("<th>");
+      document.writeln("Amount on Deposit");
+      document.writeln("</th>");
+    document.writeln("</tr>");
+   
+      for(i = 0; i < years; i++)
+      {
+         document.writeln("<tr>");
+        document.writeln("<td>" + (i+1) + "</td>");
+        var amountOnDeposit = principal * Math.pow(1 + interest, (i+1));
+        document.writeln("<td>" + amountOnDeposit.toFixed(2) + "</td>");
+         document.writeln("</tr>");
+      }
+   
+    document.writeln("</table>");
+
+  </script>
+</head>
+
+<body>
+  
+
+</body>
+</html>

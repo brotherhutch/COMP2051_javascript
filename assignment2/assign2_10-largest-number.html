@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>assign2_10</title>
+  <script type="text/javascript">
+    var number = 0;
+    var largest = 0;
+    while(true)
+    {
+      number = parseInt(prompt("Enter a single digit number\n(leave blank to end number entry)",""));
+      if(isNaN(number))
+      {
+        break;
+      }
+      else if(number > 9)
+      {
+        alert("You must enter a single digit number!");
+        continue;
+      }
+
+      if(number > largest)
+      {
+        largest = number;
+      }
+    }
+    document.writeln("The largest number entered was: " + largest);
+  </script>
+</head>
+
+<body>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>assign2_12</title>
+  <style type="text/css">
+  body {
+    font-family: arial, sans-serif;
+    font-size: 12px;
+  }
+  </style>
+  <script type="text/javascript">
+
+  function encrypt()
+  {
+    var encryptedVal = "";
+    var val = document.getElementById('data').value;
+    var el = document.getElementById('data');
+    if(isNaN(val) || val.length != 4)
+    {
+      alert("Your data must be a 4-digit integer");
+      el.focus();
+      el.select();
+      return;
+    }
+
+    // stage 1: convert each digit
+    for(i = 0; i < val.length; i++)
+    {
+      var convertedDigit = (parseInt(val[i]) + 7) % 10;
+      encryptedVal += convertedDigit;
+    }
+
+    // stage 2: swap digits
+    encryptedVal = encryptedVal[2] + encryptedVal[3] + encryptedVal[0] + encryptedVal[1];
+
+    var pnode = document.createElement('p');
+    var ptextnode = document.createTextNode("The encrypted value is: " + encryptedVal);
+    pnode.appendChild(ptextnode);
+    document.getElementById('results').appendChild(pnode);
+  }
+
+  function decrypt()
+  {
+    var decryptedVal = "";
+    var val = document.getElementById('data').value;
+    var el = document.getElementById('data');
+    if(isNaN(val) || val.length != 4)
+    {
+      alert("Your data must be a 4-digit integer");
+      el.focus();
+      el.select();
+      return;
+    }
+
+    // stage 1: swap digits
+    val = val[2] + val[3] + val[0] + val[1];
+
+    // stage 2: convert each digit
+    for(i = 0; i < val.length; i++)
+    {
+      var prepDigit = parseInt(val[i]) - 7;
+      var convertedDigit = ((prepDigit % 10) + 10) % 10; // thanks internet: javascript treats mod differently than regular math; this makes JS "behave" regarding negative numbers | http://stackoverflow.com/a/17323608
+      decryptedVal += convertedDigit;
+    }
+
+    var pnode = document.createElement('p');
+    var ptextnode = document.createTextNode("The decrypted value is: " + decryptedVal);
+    pnode.appendChild(ptextnode);
+    document.getElementById('results').appendChild(pnode);
+
+  }
+  </script>
+</head>
+<body>
+  <input type="text" id="data"><br>
+  <input type="button" value="encrypt" onclick="encrypt();">&nbsp;
+  <input type="button" value="decrypt" onclick="decrypt();">
+  <hr>
+  <div id="results"></div>
+</body>
+</html>

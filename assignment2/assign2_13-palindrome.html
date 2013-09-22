@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>assign2_13</title>
+  <style type="text/css">
+  body {
+    font-family: arial, sans-serif;
+    font-size: 12px;
+  }
+  </style>
+  <script type="text/javascript">
+    function checkPalindrome()
+    {
+      var val = document.getElementById('data').value;
+      var el = document.getElementById('data');
+
+      if(isNaN(val) || val.length != 5)
+      {
+        alert("Value entered must be a 5 digit integer.");
+        el.focus();
+        el.select();
+        return;
+      }
+
+      palindrome = true;
+      for(i = 0, j = 4; i < 3; i++, j--)
+      {
+        if(val[i] != val[j])
+        {
+          palindrome = false;
+        }
+      }
+
+      if(palindrome)
+      {
+        alert("The integer entered is a palindrome!");
+      }
+      else
+      {
+        alert("The integer enetered is not a palindrome.");
+      }
+      el.focus();
+      el.select();
+    }
+  </script>
+</head>
+
+<body>
+  <input type="text" id="data"><br>
+  <input type="button" value="Is this a palindrome?" onclick="checkPalindrome();">
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>assign2_9</title>
+  <script type="text/javascript">
+
+  // will be reading this data from a file in a later exercise
+  var employees = {
+    "employee" : [
+        {"empNum":1, "hours":40, "rate":22.25},
+        {"empNum":2, "hours":55, "rate":27.35},
+        {"empNum":3, "hours":43, "rate":19.76},
+        {"empNum":4, "hours":35, "rate":20.03},
+        {"empNum":5, "hours":61, "rate":31.02},
+        {"empNum":6, "hours":12, "rate":21.05}
+      ]
+  };
+  
+  var otHours = 0;
+  var grossPay = 0;
+  var regHours = 0;
+
+  for(i = 0; i < employees.employee.length; i ++)
+  {
+    if(employees.employee[i].hours > 40){
+      otHours = employees.employee[i].hours - 40;
+      regHours = 40;
+    }
+    else
+    {
+      regHours = employees.employee[i].hours;
+    }
+
+    grossPay = (regHours * employees.employee[i].rate) + (otHours * 1.5 * employees.employee[i].rate);
+    document.writeln("Employee number " + employees.employee[i].empNum + " gross pay: $" + grossPay.toFixed(2) + "<br>");
+  }
+  </script>
+</head>
+
+<body>
+
+</body>
+</html>
