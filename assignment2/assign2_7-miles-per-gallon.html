@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>assign2_6</title>
+  <script type="text/javascript">
+    var tankful, miles, gallons
+    var tanks = [];
+    tankful = 1;
+    while(true)
+    {
+      miles = parseInt(prompt("Enter miles driven on tankful " + tankful));
+      if(isNaN(miles))
+      {
+        break;
+      }
+      gallons = parseInt(prompt("Enter gallons used on tankful " + tankful));
+      if(isNaN(gallons))
+      {
+        break;
+      }
+      tanks.push({"miles":miles, "gallons":gallons});
+      tankful++
+    }
+
+    var totalMiles = 0;
+    var totalGallons = 0;
+    for(i = 0; i < tanks.length; i++)
+    {
+      document.writeln("Tank " + (i + 1) + " mpg: " + (tanks[i].miles / tanks[i].gallons).toFixed(2) + "<br>");
+      totalMiles += tanks[i].miles;
+      totalGallons += tanks[i].gallons;
+    }
+    document.writeln("Total miles per gallon for all tankfuls: " + (totalMiles / totalGallons).toFixed(2));
+  </script>
+</head>
+
+<body>
+
+</body>
+</html>
