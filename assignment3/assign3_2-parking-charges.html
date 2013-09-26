@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>assign3_2</title>
+  <style type="text/css">
+    body{
+      font-family: sans-serif;
+    }
+  </style>
+
+  <script>
+  	function calculateCharges(hours)
+    {
+      var chargeFirstThreeHours = 2;
+      var chargeAdditionalHours = 0.5;
+      var chargeForTwentyFourHours = 10;
+      var charges = 0.0;
+
+      if(hours <= 3)
+      {
+        charges += chargeFirstThreeHours;
+      }
+      else if(hours > 3 && hours < 24)
+      {
+        charges += chargeFirstThreeHours + ((hours - 3) * chargeAdditionalHours);
+      }
+      else
+      {
+        charges = chargeForTwentyFourHours;
+      }
+
+      if(charges > chargeForTwentyFourHours)
+      {
+        charges = chargeForTwentyFourHours;
+      }
+
+      return charges;
+    }
+
+    window.onload = function() {
+      var custCount = 1;
+      var hoursParked = 0;
+      var row, custCell, hoursCell, chargesCell;
+      var customer, hours, charges;
+      var customerArray = [];
+      var total = 0;
+      parkingTable = document.getElementById('parkingTable');
+      while(true)
+      {
+        hoursParked = parseInt(prompt("Enter the number of hours that customer " + custCount + "\nparked. (Enter nothing to continue)"));
+        if(isNaN(hoursParked))
+        {
+          break;
+        }
+
+        // customer entry table rows
+        row = parkingTable.insertRow(1); // latest customer first
+        custCell = row.insertCell(0);
+        hoursCell = row.insertCell(1);
+        chargesCell = row.insertCell(2);
+
+        customer = custCount;
+        hours = hoursParked;
+        charges = calculateCharges(hoursParked)
+        customerArray.push(customer, hours, charges);
+
+        custCell.innerHTML = customer;
+        hoursCell.innerHTML = hours;
+        chargesCell.innerHTML = "$" + charges.toFixed(2);
+
+        // remove the last row if there is already a row for total
+        if(custCount > 1) // if the count is > 1 then there is a total row
+        {
+          parkingTable.deleteRow(-1); // -1 targets the last row
+        }
+
+        // total table row
+        rowTotal = parkingTable.insertRow(-1); // -1 inserts the row as the last row
+        totalCell = rowTotal.insertCell(0);
+        totalCell.colSpan = 3;
+        totalCell.align = "right";
+        // get a running total of all charges in the list
+        total += charges;
+        totalCell.innerHTML = "<strong>Total:</strong> $" + total.toFixed(2);
+        custCount++;
+      }
+  };
+  </script>
+</head>
+
+<body>
+  <table id="parkingTable" border=1 cellpadding=3>
+    <tr>
+      <th>Customer</th>
+      <th>Hours Parked</th>
+      <th>Charges</th>
+    </tr>
+
+  </table>
+
+</body>
+</html>
