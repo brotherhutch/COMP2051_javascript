@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+	<title>assign3_7</title>
+	<meta charset=utf-8>
+	<script type="text/javascript">
+		function squareOfAsterisks(side)
+		{
+			var resultString = "";
+			for(var i = 0; i < side; i++)
+			{
+				for(var j = 0; j < side; j++)
+				{
+					resultString += "*";
+				}
+				resultString += "<br>";
+			}
+			return resultString;
+
+		}
+
+		window.onload = function() {
+			var sideLength = parseInt(prompt("Enter a side length for your square."));
+			document.getElementById('square').innerHTML = squareOfAsterisks(sideLength);
+		}
+
+	</script>
+</head>
+<body style="font-family:sans-serif;">
+<h1>Asterisks Square</h1>
+<hr>
+<div id="square"></div>
+
+</body>
+</html>

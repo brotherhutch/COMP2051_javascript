@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+	<title>assign3_6</title>
+	<meta charset=utf-8>
+	<script type="text/javascript">
+		function isEven(num)
+		{
+			return (num % 2) == false;
+		}
+
+		window.onload = function() {
+			var inputNumber
+			while(true)
+			{
+				inputNumber = parseInt(prompt("Enter a number and we'll tell you if\nit is odd or even.\nEnter nothing to quit."));
+
+				if(isNaN(inputNumber))
+				{
+					break;
+				}
+
+				var evenOrOdd = isEven(inputNumber) ? "even." : "odd.";
+				alert("Your number is " + evenOrOdd);
+
+			}
+		}
+
+	</script>
+</head>
+<body style="font-family:sans-serif;">
+<h1>Even or Odd?</h1>
+
+</body>
+</html>

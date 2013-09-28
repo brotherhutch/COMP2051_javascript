@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+	<title>assign3_5</title>
+	<meta charset=utf-8>
+	<script type="text/javascript">
+		function multiple(testDivisor, testMultiple)
+		{
+			return (testMultiple % testDivisor) == false;
+		}
+
+		function calculate()
+		{
+			var divisor = parseInt(document.getElementById('divisor').value);
+			var mult = parseInt(document.getElementById('mult').value);
+
+			if(isNaN(divisor) || isNaN(mult))
+			{
+				alert("You must enter integers for divisor and multiple");
+				document.getElementById('divisor').focus();
+				return;
+			}
+
+			document.getElementById('result').innerHTML = multiple(divisor, mult);
+			document.getElementById('divisor').focus();
+			document.getElementById('divisor').select();
+			
+
+		}
+	</script>
+</head>
+<body style="font-family:sans-serif;">
+<h1>Multiple Tester</h1>
+Divisor: <input type="text" id="divisor"> Multiple: <input type="text" id="mult"><br><br>
+<input type="button" value="Test" onclick="calculate();">
+<hr>
+<div style="font-size:150%;">Result: <span id="result"></span></div>
+
+</body>
+</html>
