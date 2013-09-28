@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+	<title>assign3_10</title>
+	<meta charset=utf-8>
+	<script type="text/javascript">
+
+		function minimum3(arr)
+		{
+			if(arr.length != 3)
+			{
+				return false;
+			}
+
+			return Math.min(Math.min(arr[0],arr[1]), arr[2]);
+		}
+
+		window.onload = function() {
+			var numberArray = [];
+			for(i = 0, j = 3; i < 3; i++, j--)
+			{
+				numberArray[i] = parseFloat(prompt("Enter a floating point number." + j + " left to enter."));
+			}
+			document.getElementById('result').innerHTML = minimum3(numberArray);
+		}
+
+	</script>
+</head>
+<body style="font-family:sans-serif;">
+<h1>Minimum Number of Three Numbers</h1>
+<hr>
+
+<div style="font-weight: bold;">Result: <span id="result"></span></div>
+</body>
+</html>

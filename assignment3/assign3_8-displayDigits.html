@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+	<title>assign3_8</title>
+	<meta charset=utf-8>
+	<script type="text/javascript">
+
+		// the instructions for this question do not make much sense,
+		// so I will code the tasks as best as I can interpret
+
+		// part (a)
+		// Calculate the integer part of the quotient when integer a is divided by integer
+		var inta = 300;
+		var intb = 23;
+		var integerQuotient = Math.floor(inta / intb);
+
+		// part (b)
+		// Calculate the integer remainder when integer a is divided by integer b.
+		var remainder = inta / intb;
+
+		// function
+		// use the programpieces developed in parts (a) and (b) to write a function displayDigits that receives an integer between 1 and 99999 and prints it as a series of digits, each pair of which is separated by two spaces. For example, the integer 4562 should be printed as 4 5 6 2
+		// 1) how are "programpieces" a and b related to the task set out for the function?
+		// 2) "each pair of which" -- where does this "pair" of digits come from? The example shows single digits separated by one(!) space.
+		function displayDigits(num)
+		{
+			var numNum = parseInt(num);
+
+			if(num > 99999 || num < 1)
+			{
+				return false;
+			}
+
+			var numString = num.toString();
+			var resultString = "";
+			for(var i = 0; i < numString.length; i++)
+			{
+				
+				resultString += numString[i] + "&nbsp;&nbsp;";
+			}
+
+			return resultString;
+		}
+
+		window.onload = function() {
+			document.getElementById('result').innerHTML = displayDigits(4562);
+		}
+
+	</script>
+</head>
+<body style="font-family:sans-serif;">
+<h1>Display Digits</h1>
+<hr>
+<div id="result"></div>
+
+</body>
+</html>

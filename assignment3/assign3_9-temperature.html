@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+	<title>assign3_9</title>
+	<meta charset=utf-8>
+	<script type="text/javascript">
+
+		function celsius(temp)
+		{
+			// returns C
+			return 5.0/9.0*(temp-32);
+		}
+
+		function fehrenheit(temp)
+		{
+			// returns F
+			return temp*(9/5)+32;
+		}
+		
+		function calculate(conversion)
+		{
+			var result = 0.0;
+			var temp = parseFloat(document.getElementById('temperatureInput').value);
+			if(conversion === "f")
+			{
+				result = fehrenheit(temp).toFixed(2) + "F";
+			}
+			else if(conversion === "c")
+			{
+				result = celsius(temp).toFixed(2) + "C";
+			}
+			else
+			{
+				return false;
+			}
+			document.getElementById('result').innerHTML = result;
+		}
+
+	</script>
+</head>
+<body style="font-family:sans-serif;">
+<h1>Temperature Conversion</h1>
+<hr>
+<input type=text id="temperatureInput"><br>
+<input type=button value="Convert to C" onclick="calculate('c');">&nbsp;
+<input type=button value="Convert to F" onclick="calculate('f');">
+<div style="font-weight: bold;">Result: <span id="result"></span></div>
+</body>
+</html>
