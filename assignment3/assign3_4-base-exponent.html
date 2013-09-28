@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+	<title>assign3_4</title>
+	<meta charset=utf-8>
+	<script type="text/javascript">
+		function integerPower(base, exponent)
+		{
+			var total = 1;
+			for(var i = 0; i < exponent; i++)
+			{
+				total *= base; 
+			}
+			return total;
+		}
+
+		function calculate()
+		{
+			var base = parseInt(document.getElementById('base').value);
+			var exponent = parseInt(document.getElementById('exponent').value);
+
+			if(isNaN(base) || isNaN(exponent))
+			{
+				alert("You must enter integers for base and exponent");
+				document.getElementById('base').focus();
+				return;
+			}
+
+			document.getElementById('result').innerHTML = integerPower(base, exponent);
+
+		}
+	</script>
+</head>
+<body style="font-family:sans-serif;">
+<h1>Exponent Calculator</h1>
+Base: <input type="text" id="base"> Exponent: <input type="text" id="exponent"><br><br>
+<input type="button" value="Calculate" onclick="calculate();">
+<hr>
+<div style="font-size:150%;">Result: <span id="result"></span></div>
+
+</body>
+</html>
