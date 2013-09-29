@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+	<title>assign3_14</title>
+	<meta charset=utf-8>
+	<script type="text/javascript">
+
+	function qualityPoints(avg)
+	{
+		if(avg < 0 || avg > 100)
+		{
+			return false;
+		}
+
+		if(avg >= 90 && avg <= 100)
+		{
+			return 4;
+		}
+		else if(avg >= 80 && avg <= 89)
+		{
+			return 3;
+		}
+		else if(avg >= 70 && avg <= 79)
+		{
+			return 2;
+		}
+		else if(avg >= 60 && avg <= 69)
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+
+	window.onload = function()
+	{
+		var userInput = parseInt(prompt("Enter your average (0 - 100)"));
+		document.writeln('<h2 style="font-family:arial;">Your GPA is: ' +  qualityPoints(userInput) + '</h2>');
+	}
+
+	</script>
+</head>
+<body style="font-family:sans-serif;">
+<h1>GPA</h1>
+<hr>
+
+</body>
+</html>
