@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+	<title>assign3_13</title>
+	<meta charset=utf-8>
+	<script type="text/javascript">
+
+	function gcd(a, b) // thanks internet http://stackoverflow.com/a/4009467/1406620
+	{
+    if (a == 0)
+    {
+        return b;
+    }
+
+    while (b != 0) 
+    {
+        if (a > b)
+        {
+            a = a - b;
+        }
+        else
+        {
+            b = b - a;
+        }
+    }
+
+    return a;
+	}
+
+	window.onload = function() {
+		var val1 = parseInt(prompt("Enter value one"));
+		var val2 = parseInt(prompt("Enter value two"));
+
+		document.writeln("<h2>The GCD is: " + gcd(val1, val2) + "</h2>");
+	}
+
+	</script>
+</head>
+<body style="font-family:sans-serif;">
+<h1>Greatest Common Divisor</h1>
+<hr>
+
+</body>
+</html>
