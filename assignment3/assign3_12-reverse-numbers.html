@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+	<title>assign3_12</title>
+	<meta charset=utf-8>
+	<script type="text/javascript">
+
+	function reverse(str)
+	{
+		var outputString = "";
+		for(var i = (str.length - 1); i >= 0; i--)
+		{
+			outputString += str[i];
+		}
+		return outputString;
+	}
+
+	var userInput = prompt("Enter an integer");
+
+	// note the status bar is a terrible place to place output - most browser don't allow this by default and/or don't have status bars as such anymore. But, that's what the question says so...
+
+	window.status = reverse(userInput);
+
+	// I'll also output it to console so it can be seen somewhere
+	console.log(reverse(userInput));
+
+	</script>
+</head>
+<body style="font-family:sans-serif;">
+<h1>Reverse Numbers</h1>
+<hr>
+
+</body>
+</html>
