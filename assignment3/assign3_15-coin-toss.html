@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+	<title>assign3_15</title>
+	<meta charset=utf-8>
+	<style>
+		.heads
+		{
+			width:40px;
+			height:40px;
+			background-color: blue;
+			border-radius: 20px;
+			display:inline-block;
+			font-weight: bold;
+			box-sizing:border-box;
+			padding: 11px 10px 10px 14px;
+			box-shadow: 1px 1px 1px;
+			margin:5px;
+		}
+
+		.heads:after
+		{
+			content: "H";
+		}
+
+		.tails
+		{
+			width:40px;
+			height:40px;
+			background-color: red;
+			border-radius: 20px;
+			display:inline-block;
+			font-weight: bold;
+			box-sizing:border-box;
+			padding: 11px 10px 10px 14px;
+			box-shadow: 1px 1px 1px;
+			margin:5px;
+		}
+
+		.tails:after
+		{
+			content: "T";
+		}
+	</style>
+	<script type="text/javascript">
+
+	function flip()
+	{
+		var coin = Math.floor(Math.random() * 2);
+		if(coin)
+		{
+			return "heads";
+		}
+		return "tails";
+	}
+
+	function toss()
+	{
+		var coinFlip = flip();
+		var heads = 0, tails = 0;
+
+		if(coinFlip === "heads")
+		{
+			heads++;
+		}
+		else
+		{
+			tails++;
+		}
+
+		var coin = document.createElement('div');
+		var coinClass = document.createAttribute('class');
+
+		coinClass.value = coinFlip;
+		coin.setAttributeNode(coinClass);
+
+		document.getElementById('table').appendChild(coin);
+		var headsTotal = parseInt(document.getElementById('totalHeads').innerHTML);
+		var tailsTotal = parseInt(document.getElementById('totalTails').innerHTML);
+		headsTotal += heads;
+		tailsTotal += tails;
+		document.getElementById('totalHeads').innerHTML = headsTotal;
+		document.getElementById('totalTails').innerHTML = tailsTotal;
+	}
+
+	window.onload = function()
+	{
+		
+	}
+
+	</script>
+</head>
+<body style="font-family:sans-serif;">
+<h1 style="display:inline-block;">Coin Toss</h1>
+<span style="color: blue;">Heads: <span id="totalHeads">0</span></span> <span style="color:red;">Tails: <span id="totalTails">0</span></span>
+<hr>
+<input type="button" value="Toss" onclick="toss();"><br>
+<div id="table"></div>
+</body>
+</html>
