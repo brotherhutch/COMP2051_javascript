@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+	<title>assign3_18</title>
+	<meta charset=utf-8>
+	<script>
+
+		// recursive power function, thanks for help http://www.gidforums.com/t-7652.html
+		function power(bas, exp)
+		{
+			if(exp >= 1)
+			{
+				return bas * (power(bas,exp - 1));
+			}
+			else
+			{
+				return 1;
+			}
+		}
+
+		window.onload = function()
+		{
+			var base = parseInt(prompt("Enter a base"));
+			var exponent = parseInt(prompt("Enter an exponent"));
+
+			var answer = power(base, exponent);
+
+			alert("The answer is: " + answer);
+		}
+
+	</script>
+</head>
+<body style="font-family:sans-serif;">
+	<h1>Recursion</h1>
+</body>
+</html>

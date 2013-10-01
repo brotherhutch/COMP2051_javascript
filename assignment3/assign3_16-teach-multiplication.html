@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+	<title>assign3_16</title>
+	<meta charset=utf-8>
+	<script>
+
+		var question = generateQuestion();
+
+		/* Returns a question and its data in an object */
+		function generateQuestion()
+		{
+			var question = {}
+			var int1 = Math.floor(Math.random() * 9 + 1);
+			var int2 = Math.floor(Math.random() * 9 + 1);
+			var answer = int1 * int2;
+
+			question.int1 = int1;
+			question.int2 = int2;
+			question.answer = answer;
+			question.toQuestionString = function()
+			{
+				return "How much is " + int1 + " x " + int2 + "?";
+			}
+
+			return question;
+		}
+
+		function checkAnswer()
+		{
+			var answerField = document.getElementById('answer');
+			var resultField = document.getElementById('result');
+			var questionField = document.getElementById('question');
+			var answer = parseInt(answerField.value);
+			var result = "";
+			
+			if(answer == question.answer)
+			{
+				result = "Very good!";
+				question = generateQuestion();
+				questionField.innerHTML = question.toQuestionString();
+			}
+			else
+			{
+				result = "No. Please try again.";
+			}
+
+			resultField.innerHTML = result;
+			answerField.focus();
+			answerField.select();
+
+		}
+
+		window.onload = function()
+		{
+			var questionField = document.getElementById('question');
+
+			questionField.innerHTML = question.toQuestionString();
+		}
+
+	</script>
+</head>
+<body style="font-family:sans-serif;">
+	<h1>Let's Learn to Multiply</h1>
+	<div id="question"></div><br>
+	<span style="font-weight: bold;">Answer: </span>
+	<input type=text id="answer"><input type=button value="Go!" onclick="checkAnswer();">
+	<div id="result"></div>
+</body>
+</html>

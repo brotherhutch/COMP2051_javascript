@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+	<title>assign3_17</title>
+	<meta charset=utf-8>
+	<script>
+	
+	// create an instance of Answer in the global scope
+	var answer = new Answer();
+
+	// define a guess the number class
+	function Answer() 
+	{
+		this.number = Math.floor(Math.random() * 1000) + 1;
+		this.generateNumber = function() {
+			this.number = Math.floor(Math.random() * 1000) + 1
+		};	
+	}
+
+	function guess()
+	{
+		var userInputField = document.getElementById('input');
+		var userInput = parseInt(document.getElementById('input').value);
+		var output = document.getElementById('output');
+		var result = "";
+
+		if(userInput < answer.number)
+		{
+			result = "Too low. Try again.";
+			userInput = "";
+			userInputField.focus();
+		}
+		else if (userInput > answer.number)
+		{
+			result = "Too high. Try again.";
+			userInput = "";
+			userInputField.focus();
+		}
+		else if (userInput == answer.number)
+		{
+			result = "Congratulations. You guessed the number!<br>A new number was picked if you want to keep playing!"
+			answer.generateNumber();
+		}
+		else
+		{
+			result = "You must enter a number.";
+		}
+
+		output.innerHTML = result;
+	}
+	
+	</script>
+</head>
+<body style="font-family:sans-serif;">
+	<h1>Guess the Number</h1>
+	<h2>Guess a number between 1 and 1000</h2>
+	<input type="text" id="input"><input type="button" value="Guess" onclick="guess();">
+	<div id="output"></div>
+
+</body>
+</html>
