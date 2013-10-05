@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8" />
+<title>assign4_6</title>
+<style>
+/* Dice thanks to: */
+/* CSS Dice: An Experiment by Jonathan Sampson - @jonathansampson */
+.die.one .dot { 
+	box-shadow: 0 .2em 0 #FFF 
+}
+.die.two .dot { 
+	background: transparent;
+	box-shadow: -2.3em -2.3em 0 #345, 
+		     2.3em  2.3em 0 #345, 
+		    -2.3em -2.3em 0 #FFF, 
+		     2.3em  2.4em 0 #FFF 
+}
+.die.three .dot { 
+	box-shadow: -2.3em -2.3em 0 #345, 
+		     2.3em  2.3em 0 #345, 
+		    -2.3em -2.3em 0 #FFF, 
+		     2.3em  2.4em 0 #FFF, 
+		         0   .2em 0 #FFF 
+}
+.die.four .dot { 
+	background: transparent;
+        box-shadow: -2.3em -2.3em 0 #345, 
+        	     2.3em  2.3em 0 #345, 
+        	    -2.3em  2.3em 0 #345, 
+        	     2.3em -2.3em 0 #345, 
+        	    -2.3em -2.3em 0 #FFF, 
+        	     2.3em  2.4em 0 #FFF, 
+        	    -2.3em  2.4em 0 #FFF, 
+        	     2.3em -2.3em 0 #FFF 
+}
+.die.five .dot { 
+	box-shadow: -2.3em -2.3em 0 #345, 
+		     2.3em  2.3em 0 #345, 
+		    -2.3em  2.3em 0 #345, 
+		     2.3em -2.3em 0 #345, 
+		    -2.3em -2.2em 0 #FFF, 
+		     2.3em -2.2em 0 #FFF, 
+		     2.3em  2.4em 0 #FFF, 
+		    -2.3em  2.4em 0 #FFF,
+		         0   .2em 0 #FFF 
+}
+.die.six .dot {
+	background: transparent;
+	box-shadow: -2.3em -2.3em 0 #345,
+		    -2.3em      0 0 #345,
+		    -2.3em  2.3em 0 #345,
+		     2.3em -2.3em 0 #345,
+		     2.3em      0 0 #345,
+		     2.3em  2.3em 0 #345,
+		    -2.3em -2.1em 0 #FFF,
+		    -2.3em   .2em 0 #FFF,
+		    -2.3em  2.4em 0 #FFF,
+		     2.3em  2.4em 0 #FFF,
+		     2.3em   .2em 0 #FFF,
+		     2.3em -2.1em 0 #FFF
+}
+.die {
+	border-top: 1px solid #f1f1f1;
+	width: 50px; height: 50px;
+	border-radius: 10px;
+	position: relative;
+	margin: 10px;
+	font-size: 6px;
+	display: inline-block;
+	box-shadow: 0px 5px 0 #CCC, 0 6px 3px #444, 0 10px 5px #999;
+	background-image: linear-gradient(top, #fefefe, #f1f1f1 80%)
+}
+.dot {
+	width: 20%; 
+	height: 20%; 
+	left: 50%; 
+	top: 50%;
+	margin: -10%;
+	background: #345;
+	border-radius: 50%;
+	display: block;
+	position: absolute;
+}
+body { text-align: center;
+		font-family: sans-serif;
+}
+</style>
+
+
+<script type="text/javascript">
+
+
+
+	var rollTimes = 1;
+	var numberOfRolls = 360; // set number of two-die rolls here. WARNING actually changing this to 36000 takes your browser a while to render
+
+	function getDieClass(num)
+	{
+		var classText = "";
+		switch(num)
+		{
+			case 1 :
+				classText = "die one";
+				break;
+			case 2 :
+				classText = "die two";
+				break;
+			case 3 :
+				classText = "die three";
+				break;
+			case 4 :
+				classText = "die four";
+				break;
+			case 5 :
+				classText = "die five";
+				break;
+			case 6 :
+				classText = "die six";
+				break;
+		}
+		return classText;
+	}
+
+	function showRoll(die1, die2)
+	{
+		var diceRolls = [die1,die2];
+
+		for (var i = 0; i < diceRolls.length; i++) {
+			
+			var dnode = document.createElement('div');
+			var snode = document.createElement('span');
+
+			dnode.setAttribute('class', getDieClass(diceRolls[i]));
+			snode.setAttribute('class', 'dot');
+
+			dnode.appendChild(snode);
+			document.getElementsByTagName('body')[0].appendChild(dnode);
+
+		};
+
+	}
+
+	function roll()
+	{
+		// ensure button is only used once
+		if(rollTimes < 1)
+		{
+			return false;
+		}
+		rollTimes--;
+
+		var arr = [];
+		var sum = 0;
+
+		for (var i = 0; i < numberOfRolls; i++) {
+			var dieRoll1 = Math.floor(Math.random() * 6) + 1;
+			var dieRoll2 = Math.floor(Math.random() * 6) + 1;
+
+			showRoll(dieRoll1,dieRoll2);
+			sum = dieRoll1 + dieRoll2;
+
+
+			if(arr[sum] === undefined)
+			{
+				arr[sum] = 0;
+			}
+
+			arr[sum]++;
+		}
+
+		showResultsTable(arr);
+	}
+
+	function showResultsTable(arr)
+	{
+		// create the table
+		var tnode = document.createElement('table');
+		tnode.setAttribute('id', "resultTable");
+		tnode.setAttribute('border', "1");
+		tnode.setAttribute('align', "center");
+		tnode.setAttribute('cellpadding', "5");
+		tnode.setAttribute('style', "border-collapse:collapse;");
+		var rnode = document.createElement('tr');
+		var cnode = document.createElement('td');
+		cnode.setAttribute('colspan', 11);
+		var ctext = document.createTextNode("Frequency chart of 2-die roll sums");
+
+		cnode.appendChild(ctext);
+		rnode.appendChild(cnode);
+		tnode.appendChild(rnode);
+		document.getElementsByTagName('body')[0].appendChild(tnode);
+
+		// add to the table that was created above
+		var tbl = document.getElementById('resultTable');
+		
+		// add head row
+		var headerRow = tbl.insertRow(-1);
+		for (var i = 0; i < 11; i++) {
+			var cell = headerRow.insertCell(i);
+			cell.innerHTML = i+2;
+		}
+		
+		// add data
+		var row = tbl.insertRow(-1);
+		for (var i = 2; i < 13; i++) { // add array offset
+			var cell = row.insertCell(i-2); // account for array offset when making cells
+			if(arr[i] === undefined){
+				arr[i] = 0;
+			}
+			cell.innerHTML = arr[i];
+		}
+	}
+
+</script>
+
+
+</head>
+<body>
+<h1>Dice Rolling</h1>
+<hr>
+
+<div class="die one">  <span class="dot"></span></div>
+<div class="die two">  <span class="dot"></span></div>
+<div class="die three"><span class="dot"></span></div>
+<div class="die four"> <span class="dot"></span></div>
+<div class="die five"> <span class="dot"></span></div>
+<div class="die six">  <span class="dot"></span></div>
+<br><br>
+<input style="padding:15px;font-size:200%;" type="button" value="Roll!" onclick="roll();"><br><hr>
+</body>
+</html>

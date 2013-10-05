@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>assign4_4</title>
+	<meta charset=utf-8>
+
+	<script>
+		var arr = [];
+		var match = false;
+		// generate and read 20 numbers
+		for(var i = 0 ; i < 20 ; i++)
+		{
+			var number = Math.floor((Math.random() * 91) + 10); // number between 10 and 100
+			for (var j = 0; j < arr.length; j++) {
+				if(number == arr[j])
+				{
+					match = true;
+				}
+			};
+
+			// add the number to the array only if it is unique
+			if(!match)
+			{
+				arr.push(number);
+			}
+			match = false;
+		}
+
+		window.onload = function()
+		{
+			// print array of unique numbers
+			for (var i = 0; i < arr.length; i++) {
+				document.getElementById('numbers').value += arr[i] + " ";
+			};
+			
+		}
+
+	</script>
+</head>
+<body style="font-family: sans-serif;">
+<h1>Reading Numbers</h1>
+<hr>
+<input type="text" id="numbers" size="80">
+
+</body>
+</html>

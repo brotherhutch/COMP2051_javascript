@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>assign4_5</title>
+	<meta charset=utf-8>
+
+	<script>
+		var order = 0;
+		var sales = [[1,2,3,4,5],[1,2,3,4,5],[1,2,3,4,5]];
+		for(var row in sales)
+		{
+			for(var col in sales[row])
+			{
+				sales[row][col] = order++;
+			}
+		}
+
+		window.onload = function() 
+		{
+	
+			var result = "Order of assignment:\n";
+
+			for(var row in sales)
+			{
+				for(var col in sales[row])
+				{
+					result += sales[row][col] + " "; 
+					if(sales[row][col] < 10)
+					{
+						result += " ";
+					}
+				}
+				result += "\n";
+			}
+
+			document.getElementById('results').value = result;
+		}
+	</script>
+</head>
+<body style="font-family: sans-serif;">
+<h1>Array Assignment Order</h1>
+<hr>
+<textarea id="results" rows="5" cols="20"></textarea>
+</body>
+</html>
