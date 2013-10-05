@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8" />
+<title>assign4_7</title>
+
+<script type="text/javascript">
+
+var games = [];
+
+function rollDice()
+{
+	var die1 = Math.floor(Math.random() * 6 + 1);
+	var die2 = Math.floor(Math.random() * 6 + 1);
+	var dieTotal = die1 + die2;
+	return dieTotal;
+}
+
+// returns an array: if the array ends in a 0, the game was lost
+// if it ends in 1, the game was one
+// the length of the array indicates the number of rolls before there was an outcome
+function play()
+{
+	var outcomes = []; // 0 = continue
+	var dieTotal = rollDice();
+	var point = 0;
+
+	if(dieTotal == 7 || dieTotal == 11)
+	{
+		outcomes[0] = 1;
+		return outcomes; 
+	}
+	else if (dieTotal == 2 || dieTotal == 3 || dieTotal == 12)
+	{
+		outcomes[0] = 0;
+		return outcomes;
+	}
+	else
+	{
+		point = dieTotal;
+		outcomes[0] = 0;
+	}
+
+	// game can continue now until point is rolled (win) or a 7(lose)
+	var outcomesIdx = 0;
+	while(true)
+	{
+		outcomesIdx++;
+		dieTotal = rollDice();
+		if(dieTotal == 7)
+		{
+			outcomes[outcomesIdx] = 0;
+			break;
+		}
+		else if(dieTotal == point)
+		{
+			outcomes[outcomesIdx] = 1;
+			break;
+		}
+		else
+		{
+			outcomes[outcomesIdx] = 0;
+		}
+	}
+
+	return outcomes;
+}
+
+
+window.onload = function() {
+	var numberOfGames = 1000; // set number of games here
+	var games = [];
+	var wins = 0;
+	var loses = 0;
+	var textarea = document.getElementById('results');
+	textarea.value = "RESULTS:\n";
+
+	// play games
+	for (var i = 0; i < numberOfGames; i++)
+	{
+		games.push(play());
+	}
+
+	// analyze results
+	for (var i = 0; i < games.length; i++) {
+		var numberOfRolls = games[i].length;
+		var rollResult = "";
+
+		if(games[i][numberOfRolls - 1] == 0) // the final roll in each game
+		{
+			rollResult = "lose";
+			loses++;
+		}
+		else
+		{
+			rollResult = "win";
+			wins++;
+		}
+
+		textarea.value += "Game " + (i + 1) + " took " + numberOfRolls + " roll(s) to " + rollResult + "\n";
+	}
+		textarea.value += "Win percentage: " + (wins / games.length * 100).toFixed(1) + "%";
+
+}
+
+</script>
+
+
+</head>
+<body>
+<h1>Craps</h1>
+<hr>
+<textarea id="results" rows="40" cols="40"></textarea>
+
+</body>
+</html>
