@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8" />
+<title>assign4_9</title>
+<style>
+	
+	body {font-family: sans-serif;}
+</style>
+
+
+<script type="text/javascript">
+
+window.onload = function() {
+
+	var sales = [[100,200,300,400],[110,120,130,140],[210,220,230,240],[310,320,330,340],[400,401,402,403]]; // last month's totals
+
+	var table,row,cell;
+	table = document.getElementById('salesTable');
+	var productTotal = 0;
+	salesTotal = [0,0,0,0];
+
+	for (var i = 0; i < sales.length; i++) {
+
+		row = table.insertRow(-1);
+		productTotal = 0;
+		
+
+		for (var j = -1; j < sales[i].length; j++) {
+			if(j == -1) // first column
+			{
+				cell = row.insertCell(-1);
+				cell.innerHTML = "<strong>Product" + (i+1) + "</strong>";
+			}
+			else
+			{
+				cell = row.insertCell(-1);
+				cell.innerHTML = sales[i][j]; // display total
+				productTotal += sales[i][j]; // total of product totals
+				salesTotal[j] += sales[i][j]; // total of sales person totals
+			}
+
+			if(j == sales[i].length - 1) // last column
+			{
+				cell = row.insertCell(-1);
+				cell.innerHTML = productTotal;
+			}
+		}
+
+		if(i == sales.length - 1) // last row
+		{
+			row = table.insertRow(-1);
+			for (var k = -1; k < sales[i].length; k++) 
+			{
+				if(k == -1) // first column
+				{
+					cell = row.insertCell(-1);
+					cell.innerHTML = "<strong>Sales Person Totals</strong>";
+				}
+				else
+				{
+					cell = row.insertCell(-1);
+
+					cell.innerHTML = salesTotal[k];
+				}
+			}
+
+		}
+	}
+}
+</script>
+
+
+</head>
+<body>
+<h1>Sales Slips</h1>
+<hr>
+<table id="salesTable" cellpadding="10" border="1" style="border-collapse:collapse;">
+	<tr>
+		<th>&nbsp;</th>
+		<th>Sales Person1</th>
+		<th>Sales Person2</th>
+		<th>Sales Person3</th>
+		<th>Sales Person4</th>
+		<th>Product Totals</th>
+	</tr>
+</table>
+
+</body>
+</html>

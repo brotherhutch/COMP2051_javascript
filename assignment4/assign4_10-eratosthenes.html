@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8" />
+<title>assign4_10</title>
+<style>
+	
+	body {font-family: sans-serif;}
+</style>
+
+
+<script type="text/javascript">
+
+	var arr = [];
+	// need an array of 1000 elements initialized to 1;
+	for (var i = 0; i < 1000; i++)
+	{
+		arr[i] = 1;
+	}
+
+	// set first two elements to 0, 0 and 1 are not prime
+	arr[0] = 0;
+	arr[1] = 0;
+
+	// loop through array looking for 1s and setting elements accordingly
+	for (var i = 2; i < arr.length; i++) 
+	{
+		if(arr[i] == 0)
+		{
+			continue;
+		}
+
+		// loop through remainder of array setting to 0 all multiples of this index
+		var multiple = i;
+		for (var j = (i+1); j < arr.length; j++)
+		{
+			if(arr[j] == 0)
+			{
+				continue;
+			}
+
+			if(j % multiple == 0)
+			{
+				arr[j] = 0;
+			}
+		}
+
+	};
+
+	window.onload = function()
+	{
+		for (var i = 0; i < arr.length; i++) {
+			if(arr[i] == 1)
+			{
+				document.getElementById('output').innerHTML += i + " ";
+			}
+		}
+		
+	}
+
+
+
+</script>
+
+
+</head>
+<body>
+<h1>Eratosthenes</h1>
+<hr>
+<div id="output"></div>
+</body>
+</html>

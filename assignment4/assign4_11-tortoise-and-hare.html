@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8" />
+<title>assign4_11</title>
+<style>
+	
+	body {font-family: sans-serif;}
+</style>
+
+
+<script type="text/javascript">
+
+var clock;
+var tortoisePosition = 0;
+var harePosition = 0;
+
+function move()
+{
+	tortoiseMove = Math.floor(Math.random() * 10 + 1);
+	hareMove = Math.floor(Math.random() * 10 + 1);
+
+	clearSquare(tortoisePosition);
+	clearSquare(harePosition);
+
+	// tortoise
+	if(tortoiseMove > 5)
+	{
+		tortoisePosition += 3; // fast plod
+	}
+	else if(tortoiseMove <= 5 && tortoiseMove >= 4)
+	{
+		tortoisePosition -= 6; // slip
+	}
+	else
+	{
+		tortoisePosition += 1; // slow plod
+	}
+	if(tortoisePosition < 0)
+	{
+		tortoisePosition = 0;
+	}
+
+	// hare
+	if(hareMove > 8)
+	{
+		// nothing to do: sleep
+	}
+	else if(hareMove <= 8 && hareMove >= 7)
+	{
+		harePosition += 9; // big hop
+	}
+	else if(hareMove == 6)
+	{
+		harePosition -= 12; // big slip
+	}
+	else if(hareMove <= 5 && hareMove >= 3)
+	{
+		harePosition += 1; // small hop
+	}
+	else
+	{
+		harePosition -= 2; // small slip
+ 	}
+ 	if(harePosition < 0)
+	{
+		harePosition = 0;
+	}
+
+	if(tortoisePosition > 69)
+	{
+		tortoisePosition = 69;
+	}
+
+	if(harePosition > 69)
+	{
+		harePosition = 69;
+	}
+	
+
+ 	putPlayer("H",harePosition);
+	putPlayer("T",tortoisePosition);
+
+	if(harePosition == tortoisePosition && tortoisePosition != 0)
+	{
+		putPlayer(' <span style="color:red;font-weight:bold;font-size:210%;">OUCH!!!</span> ', tortoisePosition);
+	}
+
+	if(tortoisePosition == 69 && harePosition == 69)
+	{
+		putPlayer(' <span style="color:red;font-weight:bold;font-size:210%;white-space:nowrap;">It is a tie!</span> ', tortoisePosition);
+		clearInterval(clock);
+		return;
+	}
+	
+	if(tortoisePosition == 69)
+	{
+		putPlayer(' <span style="color:red;font-weight:bold;font-size:210%;white-space:nowrap;">TORTOISE WINS!!! YAY!!!!</span> ', tortoisePosition);
+		clearInterval(clock);
+	}
+
+	if(harePosition == 69)
+	{
+		putPlayer(' <span style="color:red;font-weight:bold;font-size:210%;white-space:nowrap;">Hare wins</span> ', harePosition);
+		clearInterval(clock);
+	}
+}
+
+function clearSquare(sqr)
+{
+	document.getElementById('p' + sqr).innerHTML = "";
+}
+
+function putPlayer(player, sqr)
+{
+	document.getElementById('p' + sqr).innerHTML += player;
+}
+
+window.onload = function()
+{
+
+	// generate board
+	for (var i = 0; i < 70; i++) {
+		var div = document.createElement('div');
+		div.style.width = "25px";
+		div.style.height = "20px";
+		div.style.border = "1px solid black";
+		div.style.float = "left";
+		div.style.padding = "5px";
+		div.id = "p" + i;
+		document.getElementsByTagName('body')[0].appendChild(div);
+	}
+
+	// put tortoise and hare at start
+	document.getElementById('p' + tortoisePosition).innerHTML += "T";
+	document.getElementById('p' + harePosition).innerHTML += "H";
+	
+	// start timer
+	clock = setInterval(function(){move();},1000);
+
+
+}
+
+</script>
+
+
+</head>
+<body>
+<h1>Tortoise and Hare</h1>
+<hr>
+
+</body>
+</html>
