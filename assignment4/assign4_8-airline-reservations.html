@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8" />
+<title>assign4_8</title>
+<style>
+	
+	body {font-family: sans-serif;}
+</style>
+
+
+<script type="text/javascript">
+	var seats = [0,0,0,0,0,0,0,0,0,0];
+
+	function checkFirstClass()
+	{
+		var seat;
+		for (var index = 0; index < 5; index++) 
+		{
+			if(seats[index] == 0)
+			{
+				return index;
+			}
+		}
+		return -1; // no seat found
+	}
+
+	function checkEconomy()
+	{
+		var seat;
+		for (var index = 5; index < 10; index++) 
+		{
+			if(seats[index] == 0)
+			{
+				return index;
+			}
+		}
+		return -1; // no seat found
+	}
+
+	function issueBoardingPass(seat)
+	{
+		document.writeln('<div style="border: 1px solid black;box-shadow:5px 5px 5px #AAA;width:300px;font-family: sans-serif;padding:10px;"><h1>Boarding Pass</h1><hr>');
+		document.writeln('<h2>Seat #: ' + seat + '</h2>');
+		if(seat < 5)
+		{
+			document.writeln('<h4 style="color:red">First Class</h4>');
+		}
+		else
+		{
+			document.writeln('<h4 style="color:blue">Economy Class</h4>');
+		}
+		document.writeln('<h6>Small Airlines Inc.</h6>');
+		document.writeln('</div>');
+
+	}
+
+	window.onload = function() {
+	
+
+		while(true)
+		{
+			var seatRequest = parseInt(prompt("Please type 1 for First Class\nPlease type 2 for Economy\nEnter nothing to quit"));
+			if(isNaN(seatRequest))
+			{
+				break;
+			}
+
+			// seats 1 - 5 are first class, seats 6 - 10 economy
+			var seat;
+
+			switch(seatRequest)
+			{
+				case 1 :
+					seat = checkFirstClass();
+					if(seat != -1)
+					{
+						seats[seat] = 1;
+						issueBoardingPass(seat);
+					}
+					else
+					{
+						var switchToEconomy = prompt("First Class is full.\nWould you like to try Economy? (y/n)");
+						if(switchToEconomy.toLowerCase() == "y")
+						{
+							seat = checkEconomy();
+							if(seat != -1)
+							{
+								seats[seat] = 1;
+								issueBoardingPass(seat);
+							}
+							else
+							{
+								alert("Sorry, we're full. Next flight leaves in 3 hours.");
+								var exit = true;
+							}
+						}
+						else
+						{
+							alert("Sorry we could not help you. Goodbye.");
+							var exit = true;
+						}
+					}
+					break;
+				case 2 :
+					seat = checkEconomy();
+					if(seat != -1)
+					{
+						seats[seat] = 1;
+						issueBoardingPass(seat);
+					}
+					else
+					{
+						var switchToFirstClass = prompt("Economy is full.\nWould you like to try First Class? (y/n)");
+						if(switchToFirstClass.toLowerCase() == "y")
+						{
+							seat = checkFirstClass();
+							if(seat != -1)
+							{
+								seats[seat] = 1;
+								issueBoardingPass(seat);
+							}
+							else
+							{
+								alert("Sorry, we're full. Next flight leaves in 3 hours.");
+								var exit = true;
+							}
+						}
+						else
+						{
+							alert("Sorry we could not help you. Goodbye.");
+							var exit = true;
+						}
+					}
+					break;
+				default :
+					continue;
+			}
+
+			if(exit)
+			{
+				break;
+			}
+		}
+	}
+</script>
+
+
+</head>
+<body>
+<h1>Airline Reservations</h1>
+<hr>
+
+</body>
+</html>
