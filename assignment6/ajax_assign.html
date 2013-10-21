@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+	<title>AJAX Feedback Form</title>
+	<meta charset=utf-8>
+	<style type="text/css">
+		body{
+			font-family: arial, sans-serif;
+		}
+		label.field-title {
+			font-weight: bold;
+		}
+		.error {
+			color: red;
+			font-size: 80%;
+		}
+		#email-verify {
+			display: inline-block;
+			vertical-align: middle;
+		}
+		.email-ok {
+			background-image: url('ok.png');
+			width: 16px;
+			height: 16px;			
+		}
+		.email-error {
+			background-image: url('error.png');
+			width: 16px;
+			height: 16px;
+		}
+	</style>
+	<script>
+	// obj literal that indicates if our form has any errors
+	// it will be verified onsubmit
+	var formErrors = {
+		fname: true,
+		comments: false, // this field stars non-empty
+		blacklist: false,
+		email: true,
+		verifyEmail: true,
+		likes: true,
+		referrer: true
+	};
+
+	// stock add event listener function - thanks internet
+	var addEventListener = (function() {
+	    if(document.addEventListener) {
+	        return function(element, event, handler) {
+	            element.addEventListener(event, handler, false);
+	        };
+	    }
+	    else {
+	        return function(element, event, handler) {
+	            element.attachEvent('on' + event, handler);
+	        };
+	    }
+	}());
+
+
+	// AJAX handling function
+	function ajaxRequest(url, callbackFunction)
+	{
+		// check if browser supports the XMLHttpRequest Object
+		// and create appropriate request object
+		var ajaxObj = (window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject("Microsoft.XMLHTTP");
+
+		// monitor the readystate
+		ajaxObj.onreadystatechange = function()
+		{
+			if(ajaxObj.readyState == 4 && ajaxObj.status == 200)
+			{
+				callbackFunction(ajaxObj.responseXML);
+			}
+		}
+		
+
+		// send the request
+		ajaxObj.open("GET", url, true);
+
+		ajaxObj.send();
+	}
+
+	// callback function for checking the email black list
+	function checkBlacklist(xml)
+	{
+		var emailField = document.getElementById('email');
+		var blacklist = xml.getElementsByTagName('email');
+		var errorNode = document.getElementById('email-error');
+
+		// reset
+		errorNode.innerHTML = "";
+		formErrors.blacklist = false;
+		
+		for (var i = 0; i < blacklist.length; i++) {
+			if(emailField.value == blacklist[i].childNodes[0].nodeValue)
+			{
+				errorNode.innerHTML = "That email address is not allowed";
+				formErrors.blacklist = true;
+			}
+		}
+	}
+
+	// this request function is defined so that it can be passed into an event listener
+	function blacklistRequest()
+	{
+		ajaxRequest('blacklist.xml', checkBlacklist);
+	}
+
+	// verify that a text field is not empty, display error message in the 
+	// appropriate error area if the field is empty
+	function checkTextFieldNonEmpty()
+	{
+		var errorID = this.id + "-error";
+		var errorNode = document.getElementById(errorID);
+
+		//reset
+		errorNode.innerHTML = "";
+		formErrors[this.id] = false;
+
+		if(this.value == "")
+		{
+			errorNode.innerHTML = "This field must not be empty";
+			formErrors[this.id] = true;
+		}		
+	}
+
+	// verify an email address
+	function verifyEmail()
+	{
+		var emailVerifyNode = document.getElementById('email-verify');
+		var emailRegEx = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+		
+		// reset
+		emailVerifyNode.setAttribute('class', '');
+		formErrors.verifyEmail = false;
+		
+
+		if(emailRegEx.test(this.value))
+		{
+			// email is valid
+			emailVerifyNode.setAttribute('class', 'email-ok');
+
+		}
+		else
+		{
+			// email is not valid
+			emailVerifyNode.setAttribute('class', 'email-error');
+			formErrors.verifyEmail = true;
+		}
+	}
+
+	function checkCheckboxesNonEmpty()
+	{
+		var errorNode = document.getElementById('likes-error');
+
+		errorNode.innerHTML = "";
+		formErrors.likes = false;
+
+		var checkboxesNodes = document.getElementsByName('likes');
+		var boxChecked = false;
+
+		for (var i = 0; i < checkboxesNodes.length; i++) {
+			if(checkboxesNodes[i].checked)
+			{
+				boxChecked = true;
+			}
+		}
+
+		if(!boxChecked)
+		{
+			// no boxes are checked
+			errorNode.innerHTML = "At least one box must be checked";
+			formErrors.likes = true;
+		}
+	}
+
+	function checkRadioNonEmpty()
+	{
+		var errorNode = document.getElementById('referrer-error');
+
+		errorNode.innerHTML = "";
+		formErrors.referrer = false;
+
+		var radioNodes = document.getElementsByName('referrer');
+		var radioChecked = false;
+
+		for (var i = 0; i < radioNodes.length; i++) {
+			if(radioNodes[i].checked)
+			{
+				radioChecked = true;
+			}
+		}
+
+		if(!radioChecked)
+		{
+			// no boxes are checked
+			errorNode.innerHTML = "A selection must be made below";
+			formErrors.referrer = true;
+		}
+	}
+
+	function verify()
+	{
+		for(var error in formErrors)
+		{
+			if(formErrors[error])
+			{
+				alert("You must fill in the form fully to submit");
+				return false;
+			}
+		}
+
+		document.writeln("Form Submitted");
+		return true;
+	}
+
+	// add event listeners once the DOM is loaded
+	window.onload = function() {
+
+		document.forms[0].reset();
+
+		var email = document.getElementById('email');
+		var fname = document.getElementById('fname');
+		var comments = document.getElementById('comments');
+
+		addEventListener(email, 'keyup', blacklistRequest);
+		addEventListener(email, 'keyup', verifyEmail);
+		addEventListener(email, 'blur', checkTextFieldNonEmpty);
+		addEventListener(fname, 'blur', checkTextFieldNonEmpty);
+		addEventListener(comments, 'blur', checkTextFieldNonEmpty);
+
+		// add event listeners to all checkboxes
+		var checkboxesNodes = document.getElementsByName('likes');
+		for (var i = 0; i < checkboxesNodes.length; i++) 
+		{
+			addEventListener(checkboxesNodes[i], 'blur', checkCheckboxesNonEmpty);
+			addEventListener(checkboxesNodes[i], 'click', checkCheckboxesNonEmpty);	
+		}
+
+		// add event listeners to all radio selections
+		var radioNodes = document.getElementsByName('referrer');
+		for (var i = 0; i < radioNodes.length; i++) 
+		{
+			addEventListener(radioNodes[i], 'blur', checkRadioNonEmpty);
+			addEventListener(radioNodes[i], 'click', checkRadioNonEmpty);
+		}	
+	}
+	</script>
+</head>
+<body>
+<h1>Feedback Form</h1>
+<p>Please fill out this form to help us improve our site.</p>
+<form onsubmit="return verify();">
+	<label class="field-title" for="fname">Name: </label><input type="text" id="fname"> <span class="error" id="fname-error"></span><br><br>
+	<label class="field-title" for="comments">Comments: </label><span class="error" id="comments-error"></span><br>
+	<textarea rows="8" cols="40" id="comments">Enter comments here.</textarea><br><br>
+	<label class="field-title" for="email">Email Address: </label><input type="text" id="email"> <div id="email-verify"></div> <span class="error" id="email-error"></span><br><br>
+	<label class="field-title">Things you liked: </label><span class="error" id="likes-error"></span><br>
+	<label for="likes-site-design">Site design</label> <input type="checkbox" name="likes" value="site-design" id="likes-site-design"> 
+	<label for="likes-links">Links</label> <input type="checkbox" name="likes" value="links" id="likes-links"> 
+	<label for="likes-ease-of-use">Ease of Use</label> <input type="checkbox" name="likes" value="ease-of-use" id="likes-ease-of-use">
+	<label for="likes-images">Images</label> <input type="checkbox" name="likes" value="images" id="likes-images"> 
+	<label for="likes-source-code">Source code</label> <input type="checkbox" name="likes" value="source-code" id="likes-source-code"><br><br>
+	<label class="field-title">How did you get to our site? </label><span class="error" id="referrer-error"></span><br>
+	<label for="referrer-search-engine">Search engine</label> <input type="radio" name="referrer" value="search-engine" id="referrer-search-engine"> 
+	<label for="referrer-site">Links from another site</label> <input type="radio" name="referrer" value="site" id="referrer-site"> 
+	<label for="referrer-deitel">Deitel.com Website</label> <input type="radio" name="referrer" value="deitel" id="referrer-deitel"> 
+	<label for="referrer-book">Reference in a book</label> <input type="radio" name="referrer" value="book" id="referrer-book"> 
+	<label for="referrer-other">Other</label> <input type="radio" name="referrer" value="other" id="referrer-other"><br><br>
+	<label class="field-title">Rate our site: </label>
+	<select name="rating" id="rating">
+		<option>Amazing</option>
+		<option>10</option>
+		<option>9</option>
+		<option>8</option>
+		<option>7</option>
+		<option>6</option>
+		<option>5</option>
+		<option>4</option>
+		<option>3</option>
+		<option>2</option>
+		<option>1</option>
+		<option>Awful</option>
+		<span class="error" id="rating-error"></span>
+	</select>
+	<br><br>
+	<input type="submit" value="Submit">
+</form>
+</body>
+</html>

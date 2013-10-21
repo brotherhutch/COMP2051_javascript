@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE blacklist [
+  <!ELEMENT blacklist (email*)>
+  <!ELEMENT email (#PCDATA)>
+]>
+<blacklist>
+  <email>baddude@blackhat.org</email>
+  <email>baddudesbrother@blackhat.org</email>
+  <email>conman@fake.com</email>
+  <email>tedcruz@senate.gov</email>
+</blacklist>
