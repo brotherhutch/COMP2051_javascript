@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>AJAX login form</title>
+	<meta charset="utf-8">
+</head>
+<style>
+	body {
+		font-family: arial, sans-serif;
+	}
+
+	.login-success {
+		color: green;
+	}
+
+	.login-failure {
+		color: red;
+	}
+
+</style>
+<script type="text/javascript">
+	// AJAX handling function
+	function ajaxRequest(url, callbackFunction)
+	{
+		// check if browser supports the XMLHttpRequest Object
+		// and create appropriate request object
+		var ajaxObj = (window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject("Microsoft.XMLHTTP");
+
+		// monitor the readystate
+		ajaxObj.onreadystatechange = function()
+		{
+			if(ajaxObj.readyState == 4 && ajaxObj.status == 200)
+			{
+				callbackFunction(ajaxObj.responseXML);
+			}
+		}
+		
+
+		// send the request
+		ajaxObj.open("GET", url, true);
+
+		ajaxObj.send();
+	}
+
+	function checkCredentials(xml)
+	{
+		var resultNode = document.getElementById('result');
+		var users = xml.getElementsByTagName('user');
+		var usernameInput = document.getElementById('username').value;
+		var passwordInput = document.getElementById('password').value;
+		var username, password;
+		var passwordSuccess = false;
+
+		// for each user check if the username and password matches
+		for (var i = 0; i < users.length; i++) {
+			username = users[i].childNodes[1].childNodes[0].nodeValue;
+			password = users[i].childNodes[3].childNodes[0].nodeValue;
+
+			if(username == usernameInput && password == passwordInput)
+			{
+				passwordSuccess = true;
+				break;
+			}
+		}
+
+		if(passwordSuccess)
+		{
+			resultNode.setAttribute('class', 'login-success');
+			resultNode.innerHTML = "Password Accepted";
+		}
+		else
+		{
+			resultNode.setAttribute('class', 'login-failure');
+			resultNode.innerHTML = "Password Rejected";
+		}
+
+	}
+
+	function login()
+	{
+		ajaxRequest('credentials.xml', checkCredentials);
+	}
+
+</script>
+<body>
+	<h1>Login</h1>
+	<hr>
+	<form onsubmit="login(); return false;">
+		Username: <input type="text" id="username"><br><br>
+		Password: <input type="text" id="password"><br><br>
+		<input type="submit" value="Login">
+	</form>
+	<hr>
+	<div id="result"></div>
+</body>
+</html>
