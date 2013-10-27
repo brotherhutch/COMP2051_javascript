@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<products>
+  <product>
+    <id>1</id>
+    <title>Happy Happy Joy</title>
+    <artist>Jell-O</artist>
+    <price>19.99</price>
+  </product>
+  <product>
+    <id>2</id>
+    <title>Miss Me When I'm Gone</title>
+    <artist>April Sunshine</artist>
+    <price>19.99</price>
+  </product>
+  <product>
+    <id>3</id>
+    <title>No Rest For The Weary</title>
+    <artist>No Rest For The Weary</artist>
+    <price>16.95</price>
+  </product>
+  <product>
+    <id>4</id>
+    <title>Infinite Jest</title>
+    <artist>David Foster Wallace</artist>
+    <price>9.99</price>
+  </product>
+</products>

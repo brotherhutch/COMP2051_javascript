@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+	<title>Product Info</title>
+	<meta charset=utf-8>
+	<style>
+		.infobox{
+			border: 1px solid black;
+			padding: 10px;
+			width: 400px;
+		}
+	</style>
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script>
+		$(function() {
+			$('#productId').focus();
+			$('#productId').select();
+
+			$('#submit').click(function(){
+				var inputProductId = $('#productId').val()
+				$.ajax({
+					url: "product.php",
+					data: {
+						productId: inputProductId
+					},
+					success: function(data)
+					{
+						$('#product_details').html(data);
+						$('#productId').focus();
+						$('#productId').select();
+					}
+				});
+			});
+
+			// if the enter key is pressed, execute the click function of the button
+			$('#productId').keydown(function(event){
+				if(event.keyCode==13)
+				{
+					$('#submit').click();
+				}
+			})
+		});
+	</script>
+</head>
+<body>
+	<div class="infobox">
+		<h1>Product Info</h1>
+		<p>
+			Enter a Product ID:
+			<input type="text" id="productId"> 
+			<input type="button" id="submit" value="Show Details">
+		</p>
+		<div id="product_details">
+			<p>
+				There are no details to show.<br>
+				Enter a Product ID to get details.<br>
+			</p>
+		</div>
+	</div>
+</body>
+</html>
