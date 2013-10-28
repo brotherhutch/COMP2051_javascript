@@ -1,0 +1,25 @@
+/* pimpmytext.css */
+body
+{
+	margin:0 auto;
+	padding:0;
+	width:90%;
+	font-family: arial, sans-serif;
+}
+
+.bodyback
+{
+	background: url(https://dl.dropboxusercontent.com/u/5563803/comp2051/brickwall.png);
+}
+
+legend
+{
+	font-family: impact, sans-serif;
+}
+
+.bling
+{
+	font-weight: bold;
+	color: green;
+	text-decoration: underline;
+}
